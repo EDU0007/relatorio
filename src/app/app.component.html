@@ -24,7 +24,7 @@
         <div class="col-6">
    
           <select class="form-select" formControlName="req" aria-label="Default select example">
-            <option selected>Open this select menu</option>
+            <option selected>Selecione</option>
             <option value="gps">Gps</option>
             <option value="alarms">Alarms</option>
           
@@ -36,12 +36,8 @@
   
 </form>
 
-<div class="card" *ngFor="let items of Dados" >
-
-  <div class="card-body"  *ngFor="let item of items">
-    <h5 class="card-title" >{{ Dados[data]}}</h5>
-    {{ item }}
-  </div>
+<div class="card" *ngFor="let items of dataGps" >
+{{ items['acc'] }} || {{items['direction'] }}  || {{items['gate_info']}} 
 </div>
 
 <router-outlet></router-outlet>

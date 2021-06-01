@@ -2,8 +2,7 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
-import { Gps } from './app.model';
-import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -12,10 +11,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
- data:any;
+ dataGps:[] = [];
  req: any;
  form!: FormGroup;
-  Dados:any; 
+Dados:any; 
 
 constructor(
   public formBuilder: FormBuilder,
@@ -38,19 +37,17 @@ salvar(){
    if (requisicao == 'gps') {
     this.appservice.readGps(endpos).subscribe(( data  ) => {
     this.Dados = data
-    console.log(this.Dados)
-     var result = Object.keys(this.Dados).map(function(key) {
-       return key['data'];
-      
-   });
-   console.log(result)
-   
-    
+   for (var property in  this.Dados){
+      this.dataGps = this.Dados[property]  
+      }    
     })
    }else{
-
     this.appservice.readAlarms(endpos).subscribe((response) => {
-      console.log(response)
+      this.Dados = response
+      for (var property in  this.Dados){
+         this.dataGps = this.Dados[property]  
+         }    
+        console.log(this.dataGps)
      })
 
    }
