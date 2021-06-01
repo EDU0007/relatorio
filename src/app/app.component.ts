@@ -16,23 +16,26 @@ export class AppComponent implements OnInit {
  dataGps:[] = [];
  req: any;
  form!: FormGroup;
-Dados:any; 
+ Dados:any; 
+
 
 barChartOptions: ChartOptions = {
   responsive: true,
 };
-barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+barChartLabels: Label[] = ["FadigaN1","FadigaN2","Bocejo", "Ausencia", "Cigarro", "Celular", "CameraCoberta", "Atencao"]
+
 barChartType: ChartType = 'bar';
 barChartLegend = true;
 barChartPlugins = [];
 
 barChartData: ChartDataSets[] = [
-  { data: [this.dataGps], label: 'Best Fruits' }
+  { data: this.alertas(), label: 'Relatorio'}
 ];
 constructor(
   public formBuilder: FormBuilder,
   public appservice: AppService,
   ){}
+
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -40,30 +43,88 @@ constructor(
       req:null,
     });
 
-  
+  }
 
-}
-salvar(){
-  const dataReq = this.form.value.data +"T00:00:00"
-  const requisicao = this.form.value.req;
-  const endpos = requisicao + '?date_start='+dataReq
-   if (requisicao == 'gps') {
-    this.appservice.readGps(endpos).subscribe(( data  ) => {
-    this.Dados = data
-   for (var property in  this.Dados){
-      this.dataGps = this.Dados[property]  
-      }    
-    })
-   }else{
-    this.appservice.readAlarms(endpos).subscribe((response) => {
-      this.Dados = response
+
+  salvar(){
+    const dataReq = this.form.value.data +"T00:00:00"
+    const requisicao = this.form.value.req;
+    const endpos = requisicao + '?date_start='+dataReq
+    
+
+    
+    
+    
+    if (requisicao == 'gps') {
+      this.appservice.readGps(endpos).subscribe(( data  ) => {
+      this.Dados = data
       for (var property in  this.Dados){
-         this.dataGps = this.Dados[property]  
-         }    
-        console.log(this.dataGps)
-     })
+          this.dataGps = this.Dados[property]  
+        }
+        this.barChartData = [
+            { data: this.alertas(), label: 'Relatorio'}
+        ];
+        
+      })
+    }else{
+      this.appservice.readAlarms(endpos).subscribe((response) => {
+        this.Dados = response
+        for (var property in  this.Dados){
+          this.dataGps = this.Dados[property]  
+        }    
+        this.barChartData = [
+            { data: this.alertas(), label: 'Relatorio'}
+          ];
+      
+      })
+    }
 
-   }
-}
+
+  }
+
+
+  alertas(){
+    var FadigaN1 = 0;
+
+    var FadigaN2 = 0;
+    
+    var Bocejo = 0;
+    
+    var Ausencia = 0;
+    
+    var Cigarro = 0;
+    
+    var Celular = 0;
+    
+    var CameraCoberta = 0;
+    
+    var Atencao = 0;
+
+      this.dataGps.forEach(function (value) {
+
+        if(value['alert_type']=="105"){
+          FadigaN1++;
+        }
+        if(value['alert_type']=="128"){
+          FadigaN2++;
+        }
+        if(value['alert_type']=="147"){
+          Bocejo++;
+        }
+      });
+
+
+    return [FadigaN1, FadigaN2, Bocejo, Ausencia, Cigarro, Celular, CameraCoberta, Atencao]
+
+  }
+
+
+
+
+
+
+
+
+
 
 }
