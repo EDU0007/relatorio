@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { AppService } from './app.service';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,8 +25,8 @@ import { AppService } from './app.service';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-   
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

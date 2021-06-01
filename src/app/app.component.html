@@ -35,9 +35,19 @@
   </div>
   
 </form>
-
-<div class="card" *ngFor="let items of dataGps" >
-{{ items['acc'] }} || {{items['direction'] }}  || {{items['gate_info']}} 
+<div class="row d-flex justify-content-center m-4 ">
+  <div class="col-6">
+    <div class="chart-wrapper ">
+      <canvas baseChart 
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

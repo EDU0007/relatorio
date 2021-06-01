@@ -1,7 +1,9 @@
-
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
+
 
 
 
@@ -16,6 +18,17 @@ export class AppComponent implements OnInit {
  form!: FormGroup;
 Dados:any; 
 
+barChartOptions: ChartOptions = {
+  responsive: true,
+};
+barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+barChartType: ChartType = 'bar';
+barChartLegend = true;
+barChartPlugins = [];
+
+barChartData: ChartDataSets[] = [
+  { data: [this.dataGps], label: 'Best Fruits' }
+];
 constructor(
   public formBuilder: FormBuilder,
   public appservice: AppService,
