@@ -1,44 +1,61 @@
 
-<p>
-  <mat-toolbar color="warn">
-    <mat-toolbar-row>
-      <span>Relatorio
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    *{
 
-      </span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </mat-toolbar-row>
+      margin: 0;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<br>
 
-  </mat-toolbar>
-</p>
-<form [formGroup]="form" (ngSubmit)="salvar()" >
-  <div class="container-fluid">
-    <h1>Relatorio de sono</h1>
-    <div class="row d-flex">
-        <div class="col-6">
-          <input class="form-control" formControlName="data" type="date">
-        
-        </div>
-        <div class="col-6">
-   
-          <select class="form-select" formControlName="req" aria-label="Default select example">
+
+<div class="row d-flex justify-content-arount mb-4">
+  <div class="col-3" style="position: fixed;">
+  <div class="card-header">
+    Relatório de horas
+  </div>
+    <div class="card p-1">
+      <div class="card-body">
+
+         <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1"><a type="button" class="nav-link py-3 px-0 px-lg-3 " href="/#section1">Portfolio</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 " href="/#section2">About</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 " href="/#section3">Contact</a></li>
+        </ul>
+      </div>
+      <br>
+       <form [formGroup]="form" (ngSubmit)="salvar()" class="mt-4"  class="" style="margin-top: 10px;">
+
+          <input class="form-control" formControlName="data" type="date" >
+
+          <select class="form-control" formControlName="req" >
             <option selected>Selecione</option>
             <option value="gps">Gps</option>
             <option value="alarms">Alarms</option>
-          
+
           </select>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary mt-4" [disabled]="!form.valid">Buscar</button>
-  </div>
-  
+          <br>
+           <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Buscar</button>
+
 </form>
-<div class="row d-flex justify-content-center m-4">
-  <div class="col-6">
+    </div>
+  </div>
+
+</div>
+
+
+<div id="section1" class="container-fluid" >
+  <div class="row d-flex d-flex justify-content-end m-4">
+  <div class="col-8 m-4">
     <div class="chart-wrapper" *ngIf="barChartData">
-      <canvas baseChart 
+      <canvas baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
       [options]="barChartOptions"
@@ -49,5 +66,43 @@
     </div>
   </div>
 </div>
+
+</div>
+<div id="section2" class="container-fluid" >
+  <div class="row d-flex d-flex justify-content-end m-4">
+  <div class="col-8 ">
+    <div class="chart-wrapper" *ngIf="barChartData">
+      <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+    </div>
+  </div>
+</div>
+
+</div>
+<div id="section3" class="container-fluid" >
+  <div class="row d-flex d-flex justify-content-end m-4">
+  <div class="col-8 m-4">
+    <div class="chart-wrapper" *ngIf="barChartData">
+      <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
 
 <router-outlet></router-outlet>
