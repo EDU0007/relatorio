@@ -13,28 +13,26 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
- dataGps:[] = [];
- req: any;
- form!: FormGroup;
- Dados:any; 
+  dataGps:[] = [];
+  req: any;
+  form!: FormGroup;
+  Dados:any; 
 
 
-barChartOptions: ChartOptions = {
-  responsive: true,
-};
-barChartLabels: Label[] = ["FadigaN1","FadigaN2","Bocejo", "Ausencia", "Cigarro", "Celular", "CameraCoberta", "Atencao"]
+  barChartOptions!: ChartOptions;
+  barChartLabels!: Label[];
 
-barChartType: ChartType = 'bar';
-barChartLegend = true;
-barChartPlugins = [];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
 
-barChartData: ChartDataSets[] = [
-  { data: this.alertas(), label: 'Relatorio'}
-];
-constructor(
-  public formBuilder: FormBuilder,
-  public appservice: AppService,
-  ){}
+  barChartData!: ChartDataSets[];
+
+
+  constructor(
+    public formBuilder: FormBuilder,
+    public appservice: AppService,
+    ){}
 
 
   ngOnInit() {
@@ -72,14 +70,9 @@ constructor(
         for (var property in  this.Dados){
           this.dataGps = this.Dados[property]  
         }    
-        this.barChartData = [
-            { data: this.alertas(), label: 'Relatorio'}
-          ];
-      
+        this.inicializar_grafico();
       })
     }
-
-
   }
 
 
@@ -120,9 +113,17 @@ constructor(
 
 
 
+  inicializar_grafico(){
 
+    this.barChartOptions = {
+      responsive: true,
+    };
 
-
+    this.barChartLabels = ["FadigaN1","FadigaN2","Bocejo", "Ausencia", "Cigarro", "Celular", "CameraCoberta", "Atencao"]
+    this.barChartData = [
+      { data: this.alertas(), label: 'Relatorio'}
+    ];
+  }
 
 
 
