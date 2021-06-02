@@ -58,11 +58,7 @@ export class AppComponent implements OnInit {
       this.Dados = data
       for (var property in  this.Dados){
           this.dataGps = this.Dados[property]  
-        }
-        this.barChartData = [
-            { data: this.alertas(), label: 'Relatorio'}
-        ];
-        
+        }        
       })
     }else{
       this.appservice.readAlarms(endpos).subscribe((response) => {
@@ -119,13 +115,17 @@ export class AppComponent implements OnInit {
       responsive: true,
     };
 
-    this.barChartLabels = ["FadigaN1","FadigaN2","Bocejo", "Ausencia", "Cigarro", "Celular", "CameraCoberta", "Atencao"]
+    this.barChartLabels = []
     this.barChartData = [
-      { data: this.alertas(), label: 'Relatorio'}
+      { data: [this.alertas()[0]], label: 'FadigaN1'},
+      { data: [this.alertas()[1]], label: 'FadigaN2'},
+      { data: [this.alertas()[2]], label: 'Bocejo'},
+      { data: [this.alertas()[3]], label: 'Ausencia'},
+      { data: [this.alertas()[4]], label: 'Cigarro'},
+      { data: [this.alertas()[5]], label: 'Celular'},
+      { data: [this.alertas()[6]], label: 'CameraCoberta'},
+      { data: [this.alertas()[7]], label: 'Atencao'},
     ];
   }
-
-
-
 
 }

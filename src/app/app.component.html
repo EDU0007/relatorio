@@ -37,7 +37,7 @@
 </form>
 <div class="row d-flex justify-content-center m-4">
   <div class="col-6">
-    <div class="chart-wrapper ">
+    <div class="chart-wrapper" *ngIf="barChartData">
       <canvas baseChart 
       [datasets]="barChartData"
       [labels]="barChartLabels"
