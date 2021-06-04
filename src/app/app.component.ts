@@ -49,10 +49,6 @@ export class AppComponent implements OnInit {
     const requisicao = this.form.value.req;
     const endpos = requisicao + '?date_start='+dataReq
     
-
-    
-    
-    
     if (requisicao == 'gps') {
       this.appservice.readGps(endpos).subscribe(( data  ) => {
       this.Dados = data
@@ -65,7 +61,8 @@ export class AppComponent implements OnInit {
         this.Dados = response
         for (var property in  this.Dados){
           this.dataGps = this.Dados[property]  
-        }    
+        }
+        console.log(this.dataGps.length)    
         this.inicializar_grafico();
       })
     }
@@ -73,59 +70,277 @@ export class AppComponent implements OnInit {
 
 
   alertas(){
-    var FadigaN1 = 0;
 
-    var FadigaN2 = 0;
-    
-    var Bocejo = 0;
-    
-    var Ausencia = 0;
-    
-    var Cigarro = 0;
-    
-    var Celular = 0;
-    
-    var CameraCoberta = 0;
-    
-    var Atencao = 0;
+    var response_data:any = []
+    var uploadArquivo = 0;
+    var vibracao = 0;
+    var excessoDeTrafegonoSIMCard = 0;
+    var restart = 0;
+    var erroCamera1 = 0;
+    var erroCamera2 = 0;
+    var erroSIMCard = 0;
+    var excessodeVelocidade = 0;
+    var corteEnergia = 0;
+    var semCameraUSB = 0;
+    var aceleracaoBrusca = 0;
+    var freadaBrusca = 0;
+    var curvaFechada = 0;
+    var riscodeColisao = 0;
+    var habilitadoAlertaDeCorteDeCombustivel1 = 0;
+    var habilitadoAlertaDeCorteDeCombustivel2 = 0;
+    var transporteTerrestre = 0;
+    var excecaoDeAmbiente = 0;
+    var transporteMaritimo = 0;
+    var modoEstacionamento = 0;
+    var semMotorista = 0;
+    var capturaAtiva = 0;
+    var trocadeMotorista = 0;
+    var fadiga = 0;
+    var celular = 0;
+    var fumo = 0;
+    var distracao = 0;
+    var bocejo = 0;
 
-      this.dataGps.forEach(function (value) {
+    this.dataGps.forEach(function (value) {
 
-        if(value['alert_type']=="105"){
-          FadigaN1++;
-        }
-        if(value['alert_type']=="128"){
-          FadigaN2++;
-        }
-        if(value['alert_type']=="147"){
-          Bocejo++;
-        }
-      });
+      if(value['alert_type']=="105"){
+        uploadArquivo++;
+      }
 
+      if(value['alert_type']=="128"){
+        vibracao++;
+      }
+    
+      if(value['alert_type']=="129"){
+        excessoDeTrafegonoSIMCard++;
+      }
 
-    return [FadigaN1, FadigaN2, Bocejo, Ausencia, Cigarro, Celular, CameraCoberta, Atencao]
+      if(value['alert_type']=="130"){
+        restart++;
+      }
 
+      if(value['alert_type']=="132"){
+        erroCamera1++;
+      }
+
+      if(value['alert_type']=="133"){
+        erroCamera2++;
+      }
+
+      if(value['alert_type']=="134"){
+        erroSIMCard++;
+      }
+
+      if(value['alert_type']=="135"){
+        excessodeVelocidade++;
+      }
+
+      if(value['alert_type']=="136"){
+        corteEnergia++;
+      }
+
+      if(value['alert_type']=="137"){
+        semCameraUSB++;
+      }
+
+      if(value['alert_type']=="144"){
+        aceleracaoBrusca++;
+      }
+
+      if(value['alert_type']=="145"){
+        freadaBrusca++;
+      }
+
+      if(value['alert_type']=="146"){
+        curvaFechada++;
+      }
+
+      if(value['alert_type']=="147"){
+        riscodeColisao++;
+      }
+
+      if(value['alert_type']=="138"){
+        habilitadoAlertaDeCorteDeCombustivel1++;
+      }
+
+      if(value['alert_type']=="139"){
+        habilitadoAlertaDeCorteDeCombustivel2++;
+      }
+
+      if(value['alert_type']=="141"){
+        transporteTerrestre++;
+      }
+
+      if(value['alert_type']=="142"){
+        excecaoDeAmbiente++;
+      }
+
+      if(value['alert_type']=="149"){
+        transporteMaritimo++;
+      }
+
+      if(value['alert_type']=="150"){
+        modoEstacionamento++;
+      }
+
+      if(value['alert_type']=="148"){
+        semMotorista++;
+      }
+
+      if(value['alert_type']=="152"){
+        capturaAtiva++;
+      }
+
+      if(value['alert_type']=="153"){
+        trocadeMotorista++;
+      }
+
+      if(value['alert_type']=="140"){
+        fadiga++;
+      }
+
+      if(value['alert_type']=="151"){
+        celular++;
+      }
+
+      if(value['alert_type']=="154"){
+        fumo++;
+      }
+
+      if(value['alert_type']=="143"){
+        distracao++;
+      }
+
+      if(value['alert_type']=="160"){
+        bocejo++;
+      }
+    });
+
+    // verificacao de existencia de dados 
+    if (uploadArquivo>0){
+      response_data.push({ data: [uploadArquivo], label: "Upload de arquivo" })
+    }
+
+    if (vibracao>0){
+      response_data.push({ data: [vibracao], label:"Vibração" })
+    }
+
+    if (excessoDeTrafegonoSIMCard>0){
+      response_data.push({ data: [excessoDeTrafegonoSIMCard], label:"Excesso de tráfego no SIM Card" })
+    }
+
+    if (restart>0){
+      response_data.push({ data: [restart], label:"Restart" })
+    }
+
+    if (erroCamera1>0){
+      response_data.push({ data: [erroCamera1], label:"Erro câmera 1" })
+    }
+
+    if (erroCamera2>0){
+      response_data.push({ data: [erroCamera2], label:"Erro câmera 2" })
+    }
+
+    if (erroSIMCard>0){
+      response_data.push({ data: [erroSIMCard], label:"Erro SIM Card" })
+    }
+
+    if (excessodeVelocidade>0){
+      response_data.push({ data: [excessodeVelocidade], label:"Excesso de Velocidade" })
+    }
+
+    if (corteEnergia>0){
+      response_data.push({ data: [corteEnergia], label:"Corte de energia" })
+    }
+
+    if (semCameraUSB>0){
+      response_data.push({ data: [semCameraUSB], label:"Sem câmera USB" })
+    }
+
+    if (aceleracaoBrusca>0){
+      response_data.push({ data: [aceleracaoBrusca], label:"Aceleração brusca" })
+    }
+
+    if (freadaBrusca>0){
+      response_data.push({ data: [freadaBrusca], label:"Freada brusca" })
+    }
+
+    if (curvaFechada>0){
+      response_data.push({ data: [curvaFechada], label:"Curva fechada" })
+    }
+
+    if (riscodeColisao>0){
+      response_data.push({ data: [riscodeColisao], label:"Risco de Colisão" })
+    }
+
+    if (habilitadoAlertaDeCorteDeCombustivel1>0){
+      response_data.push({ data: [habilitadoAlertaDeCorteDeCombustivel1], label:"Habilitado alerta de corte de combustível 1" })
+    }
+
+    if (habilitadoAlertaDeCorteDeCombustivel2>0){
+      response_data.push({ data: [habilitadoAlertaDeCorteDeCombustivel2], label:"Habilitado alerta de corte de combustível 1" })
+    }
+
+    if (transporteTerrestre>0){
+      response_data.push({ data: [transporteTerrestre], label:"Transporte terrestre" })
+    }
+
+    if (excecaoDeAmbiente>0){
+      response_data.push({ data: [excecaoDeAmbiente], label:"Exceção de ambiente" })
+    }
+
+    if (transporteMaritimo>0){
+      response_data.push({ data: [transporteMaritimo], label:"Transporte marítimo" })
+    }
+
+    if (modoEstacionamento>0){
+      response_data.push({ data: [modoEstacionamento], label:"Modo estacionamento" })
+    }
+
+    if (semMotorista>0){
+      response_data.push({ data: [semMotorista], label:"Sem motorista" })
+    }
+
+    if (capturaAtiva>0){
+      response_data.push({ data: [capturaAtiva], label:"Captura ativa" })
+    }
+
+    if (trocadeMotorista>0){
+      response_data.push({ data: [trocadeMotorista], label:"Troca de motorista" })
+    }
+
+    if (fadiga>0){
+      response_data.push({ data: [fadiga], label:"Fadiga" })
+    }
+
+    if (celular>0){
+      response_data.push({ data: [celular], label:"Celular" })
+    }
+
+    if (fumo>0){
+      response_data.push({ data: [fumo], label:"Fumo" })
+    }
+
+    if (distracao>0){
+      response_data.push({ data: [distracao], label:"Distração" })
+    }
+
+    if (bocejo>0){
+      response_data.push({ data: [bocejo], label:"Bocejo "})
+    }
+
+    return response_data;
   }
 
 
 
   inicializar_grafico(){
-
     this.barChartOptions = {
       responsive: true,
     };
 
-    this.barChartLabels = []
-    this.barChartData = [
-      { data: [this.alertas()[0]], label: 'FadigaN1'},
-      { data: [this.alertas()[1]], label: 'FadigaN2'},
-      { data: [this.alertas()[2]], label: 'Bocejo'},
-      { data: [this.alertas()[3]], label: 'Ausencia'},
-      { data: [this.alertas()[4]], label: 'Cigarro'},
-      { data: [this.alertas()[5]], label: 'Celular'},
-      { data: [this.alertas()[6]], label: 'CameraCoberta'},
-      { data: [this.alertas()[7]], label: 'Atencao'},
-    ];
+    this.barChartLabels = [""]
+    this.barChartData = this.alertas();
   }
 
 }
