@@ -11,9 +11,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import {MatSelectModule} from '@angular/material/select';
 import { AppService } from './app.service';
 import { ChartsModule } from 'ng2-charts';
+import {MatButtonModule} from '@angular/material/button';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './map/map.component'
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,9 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    MatButtonModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
