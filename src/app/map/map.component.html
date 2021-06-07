@@ -6,9 +6,11 @@
         [options]="options"
         >
         <map-marker 
-        [position]="markerPositions"
-        [options]="markerOptions"
-
+        *ngFor="let marker of markerPositions"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [options]="marker.options"
         >
       </map-marker>
      

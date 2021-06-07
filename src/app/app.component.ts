@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
 
   alertas(){
 
-    var response_data:any = []
+    var response_data:any = [];
     var uploadArquivo = 0;
     var vibracao = 0;
     var excessoDeTrafegonoSIMCard = 0;
