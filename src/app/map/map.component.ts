@@ -19,11 +19,8 @@ export class MapComponent implements OnInit {
     {position: {lat: -2.584254, lng:-44.331819}, label: {color:'red', text: "teste6"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
     {position: {lat: -2.584252, lng:-44.331819}, label: {color:'red', text: "teste7"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}
   ]
-  center : google.maps.LatLngLiteral = {
-    lat :-5.5255,
-    lng : -47.477,
-
-  }
+  center : google.maps.LatLngLiteral = this.pontos[0].position
+  
   options: google.maps.MapOptions = {
     //mapTypeId: 'hybrid',
     zoomControl: true,
