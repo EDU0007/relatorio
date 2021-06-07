@@ -1,0 +1,16 @@
+<div class="mb-4">
+  <div>
+    <h5 class="text-center">Média de eventos por veículo/dia.</h5>
+    <div class="chart" style="width: 700px; height: 300px; margin-top:10px" >
+      <canvas baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </div>
+</div>
+

@@ -13,11 +13,18 @@ import { AppService } from './app.service';
 import { ChartsModule } from 'ng2-charts';
 import {MatButtonModule} from '@angular/material/button';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { MapComponent } from './map/map.component'
+import { MapComponent } from './map/map.component';
+import { PrimeiroGraficoComponent } from './primeiro-grafico/primeiro-grafico.component';
+import { UltimoGraficoComponent } from './ultimo-grafico/ultimo-grafico.component'
+import { NgxEchartsModule } from 'ngx-echarts';
+import { GraficoFinalComponent } from './grafico-final/grafico-final.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    PrimeiroGraficoComponent,
+    UltimoGraficoComponent,
+    GraficoFinalComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +39,11 @@ import { MapComponent } from './map/map.component'
     HttpClientModule,
     ChartsModule,
     MatButtonModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

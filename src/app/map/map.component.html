@@ -1,12 +1,12 @@
         <google-map
         height="300px"
-        width="500px"
+        width="650px"
         [zoom]="zoom"
         [center]="center"
         [options]="options"
         >
         <map-marker 
-        *ngFor="let marker of markerPositions"
+        *ngFor="let marker of pontos"
         [position]="marker.position"
         [label]="marker.label"
         [title]="marker.title"

@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/relatorio",
             "allowedCommonJsDependencies": [
-              "lodash"
+              "chart.js","lodash"
            ],
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,7 +35,7 @@
           "node_modules/bootstrap/dist/css/bootstrap.min.css"
           ],
               "scripts": ["node_modules/jquery/dist/jquery.min.js", 
-          "node_modules/bootstrap/dist/js/bootstrap.min.js"],
+          "node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
