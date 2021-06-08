@@ -55,8 +55,8 @@
   </div>
   <div id="section" class="container-fluid m-auto">
     <div class="row d-flex justify-content-end">
-      <div class="col-8 m-4 d-flex justify-content-center">
-        <app-primeiro-grafico [DadosGrafico]="DadosGrafico"></app-primeiro-grafico>
+      <div class="col-8 m-4 d-flex justify-content-center " *ngIf="barChartData">
+        <app-primeiro-grafico [data]="alertas()"></app-primeiro-grafico>
       </div>
     </div>
   </div>

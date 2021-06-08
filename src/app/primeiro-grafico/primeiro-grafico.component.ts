@@ -10,7 +10,7 @@ import { Label } from 'ng2-charts';
 })
 export class PrimeiroGraficoComponent implements OnInit {
 
-  @Input() DadosGrafico:any;
+  @Input() data:any;
 
   pieChartOptions !: ChartOptions;
 
@@ -25,7 +25,6 @@ export class PrimeiroGraficoComponent implements OnInit {
 
   ngOnInit(): void {
     this.iniciarGrafico()
-   
   }
 
   // events
@@ -39,13 +38,23 @@ export class PrimeiroGraficoComponent implements OnInit {
 
 
   iniciarGrafico() {
+    console.log(this.data)
+    var data_grafico:any = []
+    var label_grafico:any = []
+    this.data.forEach(function (value:any) {
+      label_grafico.push(value.label)
+      data_grafico.push(value.data)
+    })
+
     this.pieChartOptions = {
       responsive: true,
 
     };
-    this.pieChartLabels = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-    this.pieChartData = this.DadosGrafico
-     console.log(this.DadosGrafico)
+
+    // this.pieChartLabels = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+    this.pieChartLabels = label_grafico;
+    this.pieChartData = data_grafico
+   
     this.pieChartColors = [
       {
         backgroundColor: ['rgb(255, 191, 0)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],

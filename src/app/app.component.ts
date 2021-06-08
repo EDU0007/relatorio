@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   title(title: any) {
     throw new Error('Method not implemented.');
   }
-  dataGps:[] = [];
+  dataResponse:[] = [];
   req: any;
   form!: FormGroup;
   Dados:any; 
@@ -59,16 +59,15 @@ export class AppComponent implements OnInit {
       this.appservice.readGps(endpos).subscribe(( data  ) => {
       this.Dados = data
       for (var property in  this.Dados){
-          this.dataGps = this.Dados[property]  
+          this.dataResponse = this.Dados[property]  
         }        
       })
     }else{
       this.appservice.readAlarms(endpos).subscribe((response) => {
         this.Dados = response
         for (var property in  this.Dados){
-          this.dataGps = this.Dados[property]  
-        }
-        console.log(this.dataGps.length)    
+          this.dataResponse = this.Dados[property]  
+        } 
         this.inicializar_grafico();
       })
     }
@@ -107,7 +106,7 @@ export class AppComponent implements OnInit {
     var distracao = 0;
     var bocejo = 0;
 
-    this.dataGps.forEach(function (value) {
+    this.dataResponse.forEach(function (value) {
 
       if(value['alert_type']=="105"){
         uploadArquivo++;
@@ -337,7 +336,6 @@ export class AppComponent implements OnInit {
 
     return response_data;
   }
-
 
 
   inicializar_grafico(){
