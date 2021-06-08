@@ -12,7 +12,7 @@ export class GraficoFinalComponent implements OnInit {
 
   ngOnInit(): void {
     const dataAxis = [
-      'A',
+      '12h',
       'B',
       'C',
       'D',

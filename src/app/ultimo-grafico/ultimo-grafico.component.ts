@@ -17,15 +17,15 @@ export class UltimoGraficoComponent implements OnInit {
     const data1 = [];
     const data2 = [];
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
+    for (let i = 0; i < 31; i++) {
+      xAxisData.push('data' + i);
       data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
       data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
     }
 
     this.options = {
       legend: {
-        data: ['bar', 'bar2'],
+        data: ['bar'],
         align: 'left',
       },
       tooltip: {},
@@ -45,12 +45,7 @@ export class UltimoGraficoComponent implements OnInit {
         
           animationDelay: (idx: number) => idx * 10,
         },
-        {
-          name: 'bar2',
-          type: 'bar',
-          data: data2,
-          animationDelay: (idx: number) => idx * 10 + 100,
-        },
+    
       ],
       animationEasing: 'elasticOut',
       animationDelayUpdate: (idx: number) => idx * 5,
