@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   req: any;
   form!: FormGroup;
   Dados:any; 
+  DadosGrafico:any =[];
 
 
   barChartOptions!: ChartOptions;
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
   barChartLegend = true;
   barChartPlugins = [];
 
-  barChartData!: ChartDataSets[];
+  barChartData!: any [];
 
 
   constructor(
@@ -42,7 +43,9 @@ export class AppComponent implements OnInit {
     this.form = this.formBuilder.group({
       data:null,
       req:null,
+    
     });
+
 
   }
 
@@ -343,7 +346,8 @@ export class AppComponent implements OnInit {
     };
 
     this.barChartLabels = [""]
-    this.barChartData = this.alertas();
+    this.DadosGrafico = this.alertas();
+    this.barChartData =   this.DadosGrafico
   }
 
 }
