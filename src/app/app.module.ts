@@ -20,6 +20,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { GraficoFinalComponent } from './grafico-final/grafico-final.component';
 import { MENSAISUNIDADESComponent } from './mensaisunidades/mensaisunidades.component';
 import { TiposAlertaComponent } from './tipos-alerta/tipos-alerta.component';
+import { NgPrintModule } from 'ng-print';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,11 @@ import { TiposAlertaComponent } from './tipos-alerta/tipos-alerta.component';
     ChartsModule,
     MatButtonModule,
     GoogleMapsModule,
+  
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })
+  
     
   ],
   providers: [],

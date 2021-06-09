@@ -40,9 +40,14 @@
   </div>
 
 
-  
+  <div id="htmlData">
+    
   <div id="section1" class="container-fluid">
     <div class="row  d-flex justify-content-end m-auto">
+      <div class="col-md-4 text-left">
+        <button class="btn btn-success btn-sm" (click)="openPDF()" *ngIf="barChartData">Download PDF</button>
+  
+      </div>
       <div class="col-8 mr-4">
       
         <div class="chart-wrapper" *ngIf="barChartData">
@@ -92,6 +97,7 @@
     </div>
   </div>
 
+</div>
 </body>
 </html>
 

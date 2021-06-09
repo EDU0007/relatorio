@@ -45,9 +45,7 @@ export class MapComponent implements OnInit {
     this.pontos=this.data_pontos();
     this.center = this.pontos[0].position;
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.center = this.pontos
-    })  
+ 
   }
 
   data_pontos(){

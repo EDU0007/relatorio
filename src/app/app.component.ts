@@ -1,9 +1,10 @@
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { AppService } from './app.service';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 
@@ -13,9 +14,8 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title(title: any) {
-    throw new Error('Method not implemented.');
-  }
+  @ViewChild('htmlData') htmlData!:ElementRef;
+  
   dataResponse:[] = [];
   req: any;
   form!: FormGroup;
@@ -48,8 +48,26 @@ export class AppComponent implements OnInit {
 
 
   }
+  printPage() {
+    window.print();
+  }
 
-
+  public openPDF():void {
+    var dados = document.getElementById('htmlData') as HTMLCanvasElement;
+      
+    html2canvas(dados).then(canvas => {
+        
+        let fileWidth = 350;
+        let fileHeight = canvas.height * fileWidth / canvas.width;
+        
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a1');
+        let position = 0;
+        PDF.addImage(FILEURI, 'JPGE', 0, position, fileWidth, fileHeight)
+        
+        PDF.save('angular-demo.pdf');
+    });     
+  }
   salvar(){
     const dataReq = this.form.value.data +"T00:00:00"
     const requisicao = this.form.value.req;
