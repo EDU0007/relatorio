@@ -1,55 +1,85 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 @Component({
   selector: 'app-ultimo-grafico',
   templateUrl: './ultimo-grafico.component.html',
   styleUrls: ['./ultimo-grafico.component.css']
 })
 export class UltimoGraficoComponent implements OnInit {
-  options: any;
- 
-  constructor() {}
+  @Input() dataMap:any;
+  response : any = [];
+  constructor(){
 
-  ngOnInit(): void {
-    this.iniciarGrafico()
   }
-  iniciarGrafico(){
-    const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
+  ngOnInit(){
+    this.acumulada()
+  }
 
-    for (let i = 0; i < 31; i++) {
-      xAxisData.push('data' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+  acumulada(){
+    this.dataMap.forEach((item:any) =>{
+      console.log(item.gps_speed)
+    })
     }
+  
+  
 
-    this.options = {
-      legend: {
-        data: ['bar'],
-        align: 'left',
+   isLoading = false;
+  options: any = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        label: {
+          backgroundColor: '#bdbf1f'
+        }
+      }
+    },
+    legend: {
+      data: ['sonolencia']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        boundaryGap: false,
+        data: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: 'sonolencia',
+        type: 'line',
+        stack: 'counts',
+        color:'#f1f332',
+        areaStyle: { normal: {} },
+        data: [10, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230]
       },
-      tooltip: {},
-      xAxis: {
-        data: xAxisData,
-        silent: false,
-        splitLine: {
-          show: false,
-        },
+      {
+        name: 'Bocejo',
+        type: 'line',
+        stack: 'counts',
+        color:'#707042',
+        areaStyle: { normal: {} },
+        data: [10, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230]
       },
-      yAxis: {},
-      series: [
-        {
-          name: 'bar',
-          type: 'bar',
-          data: data1,
-        
-          animationDelay: (idx: number) => idx * 10,
-        },
-    
-      ],
-      animationEasing: 'elasticOut',
-      animationDelayUpdate: (idx: number) => idx * 5,
-    };
-  }
-  }
-
+      {
+        name: 'Distração',
+        type: 'line',
+        stack: 'counts',
+        color:'#285237',
+        areaStyle: { normal: {} },
+        data: [10, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230]
+      },
+      
+    ]
+  };
+}
