@@ -13,7 +13,14 @@
         [options]="marker.options"
         >
       </map-marker>
-     
       </google-map>
-      
-     
+  
+      <div class="form-check form-check-inline" *ngFor="let category of dataMap.categoria; let i = index">
+        <input class="form-check-input" type="checkbox" id="inlineFormCheck" value="{{category}}" (change)="onCheckboxChange($event)">
+        <label class="form-check-label" for="inlineFormCheck">
+          {{category}}
+        </label>
+      </div>
+ 
+
+

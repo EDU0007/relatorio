@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MapInfoWindow,MapMarker } from '@angular/google-maps';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -9,19 +10,13 @@ import { Label } from 'ng2-charts';
 })
 export class MapComponent implements OnInit {
   @Input() dataMap:any;
-  
-  zoom = 12
-  // pontos: any  =  [
-  //   {position: {lat: -2.584252, lng: -44.331819}, label: {color:'red', text: "teste1"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
-  //   {position: {lat: -2.584250, lng:-44.331819}, label: {color:'red', text: "teste2"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
-  //   {position: {lat: -2.584251, lng:-44.331819}, label: {color:'red', text: "teste3"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
-  //   {position: {lat: -2.584252, lng: -46.321240}, label: {color:'red', text: "teste4"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
-  //   {position: {lat:-2.584252, lng: -44.331819}, label: {color:'red', text: "teste5"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
-  //   {position: {lat: -2.584254, lng:-44.331819}, label: {color:'red', text: "teste6"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
-  //   {position: {lat: -2.584252, lng:-44.331819}, label: {color:'red', text: "teste7"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}
-  // ]
+  @ViewChild(MapInfoWindow) infoWindow: any;
 
-  pontos:any = []
+  zoom = 12
+
+  pontos:any = [];
+  alerts:any = [];
+
   center!: google.maps.LatLngLiteral;
   
   options: google.maps.MapOptions = {
@@ -37,25 +32,59 @@ export class MapComponent implements OnInit {
     draggable: false,
     label: 'ausenciad',
   };
+
   markerPositions: google.maps.LatLngLiteral = this.pontos;
 
-  constructor() { }
 
-  ngOnInit(): void {
-    this.pontos=this.data_pontos();
-    this.center = this.pontos[0].position;
-
- 
+  category:any;
+  form: FormGroup;
+  constructor(private fb: FormBuilder) { 
+    this.form = this.fb.group({
+      checkArray: this.fb.array([], [Validators.required])
+    })
   }
 
-  data_pontos(){
-    // console.log(this.dataMap)
-    var pontos:any = []
-    this.dataMap.forEach(function (value:any) {
-      pontos.push(value.mapa)
-    })
-    
-    return pontos;
+  ngOnInit(): void {
+    // this.pontos=this.dataMap.mapa;
+    // this.center = this.pontos[0].position;
+    // if(!this.form.value.checkArray){
+    //   this.form.value.checkArray = []
+    // }
+  }
+
+
+
+
+  onCheckboxChange(e:any) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+    this.point_category();
+  }
+
+  point_category(){
+    var new_point:any = []
+
+    this.dataMap.mapa.forEach( (point:any) => {
+      if(this.form.value.checkArray.includes(point.label.text)){
+        new_point.push(point);
+      }
+    });
+    // falta colocar validações- 1 validar quando tira selecao deixando vazio
+    this.pontos=new_point;
+    this.center = this.pontos[0].position;
+    console.log(this.form.value.checkArray)
+
   }
 
 }
