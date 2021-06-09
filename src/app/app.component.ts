@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
           this.dataResponse = this.Dados[property]  
         } 
         this.inicializar_grafico();
+        this.inicializar_mapa();
       })
     }
   }
@@ -283,7 +284,7 @@ export class AppComponent implements OnInit {
     }
 
     if (habilitadoAlertaDeCorteDeCombustivel2>0){
-      response_data.push({ data: [habilitadoAlertaDeCorteDeCombustivel2], label:"Habilitado alerta de corte de combustível 1" })
+      response_data.push({ data: [habilitadoAlertaDeCorteDeCombustivel2], label:"Habilitado alerta de corte de combustível 2" })
     }
 
     if (transporteTerrestre>0){
@@ -346,6 +347,296 @@ export class AppComponent implements OnInit {
     this.barChartLabels = [""]
     this.DadosGrafico = this.alertas();
     this.barChartData =   this.DadosGrafico
+  }
+  inicializar_mapa(){
+    var response_data:any = []
+    this.dataResponse.forEach(function (value) {
+      // {position: {lat: -2.584252, lng: -44.331819}, label: {color:'red', text: "teste1"}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }},
+      
+      if(value['alert_type']=="105"){
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Upload de arquivo'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="128"){
+        // response_data.push({ data: [vibracao], alert:"Vibração" })
+
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Vibração'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+
+      }
+    
+      if(value['alert_type']=="129"){
+        // response_data.push({ data: [excessoDeTrafegonoSIMCard], alert:"Excesso de tráfego no SIM Card" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Excesso de tráfego no SIM Card'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="130"){
+        // response_data.push({ data: [restart], alert:"Restart" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Restart'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="132"){
+        // response_data.push({ data: [erroCamera1], alert:"Erro câmera 1" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Erro câmera 1'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="133"){
+        // response_data.push({ data: [erroCamera2], alert:"Erro câmera 2" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Erro câmera 2'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="134"){
+        // response_data.push({ data: [erroSIMCard], alert:"Erro SIM Card" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Erro SIM Card'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="135"){
+        // response_data.push({ data: [excessodeVelocidade], alert:"Excesso de Velocidade" })
+
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Excesso de Velocidade'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="136"){
+        // response_data.push({ data: [corteEnergia], alert:"Corte de energia" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Corte de energia'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="137"){
+      //  response_data.push({ data: [semCameraUSB], alert:"Sem câmera USB" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Sem câmera USB'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="144"){
+        // response_data.push({ data: [aceleracaoBrusca], alert:"Aceleração brusca" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Aceleração brusca'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="145"){
+        // response_data.push({ data: [freadaBrusca], alert:"Freada brusca" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Freada brusca'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="146"){
+        // response_data.push({ data: [curvaFechada], alert:"Curva fechada" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Curva fechada'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="147"){
+        // response_data.push({ data: [riscodeColisao], alert:"Risco de Colisão" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Risco de Colisão'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="138"){
+        // response_data.push({ data: [habilitadoAlertaDeCorteDeCombustivel1], alert:"Habilitado alerta de corte de combustível 1" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Habilitado alerta de corte de combustível 1'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="139"){
+        // response_data.push({ data: [habilitadoAlertaDeCorteDeCombustivel2], alert:"Habilitado alerta de corte de combustível 2" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Habilitado alerta de corte de combustível 2'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="141"){
+        // response_data.push({ data: [transporteTerrestre], alert:"Transporte terrestre" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Transporte terrestre'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="142"){
+        // response_data.push({ data: [excecaoDeAmbiente], alert:"Exceção de ambiente" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Exceção de ambiente'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="149"){
+        // response_data.push({ data: [transporteMaritimo], alert:"Transporte marítimo" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Transporte marítimo'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="150"){
+        // response_data.push({ data: [modoEstacionamento], alert:"Modo estacionamento" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Modo estacionamento'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="148"){
+        // response_data.push({ data: [semMotorista], alert:"Sem motorista" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Sem motorista'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="152"){
+        // response_data.push({ data: [capturaAtiva], alert:"Captura ativa" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Captura ativa'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="153"){
+        // response_data.push({ data: [trocadeMotorista], alert:"Troca de motorista" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Troca de motorista'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="140"){
+        // response_data.push({ data: [fadiga], alert:"Fadiga" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Fadiga'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="151"){
+        // response_data.push({ data: [celular], alert:"Celular" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Celular'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="154"){
+        // response_data.push({ data: [fumo], alert:"Fumo" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Fumo'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="143"){
+      //  response_data.push({ data: [distracao], alert:"Distração" })
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Distração'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+      if(value['alert_type']=="160"){
+        // response_data.push({ data: [bocejo], alert:"Bocejo "})
+        response_data.push(
+          {
+            mapa: { position: {lat: parseFloat(value['lat']), lng: parseFloat(value['lng'])}, label: {color:'red', text: 'Bocejo'}, title: 'marker', options:{ animation: google.maps.Animation.BOUNCE }}, 
+            dados:{imei: value['device_imei'], file: value['file'], data_time: value['gps_time'], velocidade: value['gps_speed']}
+          }
+        )
+      }
+
+    });
+    return response_data;
   }
 
 }

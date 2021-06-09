@@ -15,9 +15,9 @@ export class PrimeiroGraficoComponent implements OnInit {
   pieChartOptions !: ChartOptions;
 
   pieChartLabels: Label[] = [];
-  pieChartData: any [] = [];
+  pieChartData: number[] = [];
   pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
+  pieChartLegend = true;
   pieChartPlugins = [];
   pieChartColors: any[] = [];
 
@@ -38,28 +38,28 @@ export class PrimeiroGraficoComponent implements OnInit {
 
 
   iniciarGrafico() {
-    console.log(this.data)
+   
     var data_grafico:any = []
     var label_grafico:any = []
     this.data.forEach(function (value:any) {
-      label_grafico.push(value.label)
-      data_grafico.push(value.data)
+      label_grafico.push([value.label])
+      data_grafico.push(value.data[0])
     })
 
     this.pieChartOptions = {
       responsive: true,
-
     };
 
+    // console.log(label_grafico)
     // this.pieChartLabels = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
     this.pieChartLabels = label_grafico;
     this.pieChartData = data_grafico
    
-    this.pieChartColors = [
-      {
-        backgroundColor: ['rgb(255, 191, 0)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-      },
-    ];
+    // this.pieChartColors = [
+    //   {
+    //     backgroundColor: ['rgb(255, 191, 0)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+    //   },
+    // ];
 
   }
 
