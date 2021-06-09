@@ -48,9 +48,7 @@ export class AppComponent implements OnInit {
 
 
   }
-  printPage() {
-    window.print();
-  }
+ 
 
   public openPDF():void {
     var dados = document.getElementById('htmlData') as HTMLCanvasElement;
@@ -369,6 +367,8 @@ export class AppComponent implements OnInit {
     this.DadosGrafico = this.alertas();
     this.barChartData =   this.DadosGrafico
   }
+
+
   inicializar_mapa(){
     var response_data:any = []
     this.dataResponse.forEach(function (value) {
