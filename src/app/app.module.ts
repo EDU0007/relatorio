@@ -18,13 +18,19 @@ import { PrimeiroGraficoComponent } from './primeiro-grafico/primeiro-grafico.co
 import { UltimoGraficoComponent } from './ultimo-grafico/ultimo-grafico.component'
 import { NgxEchartsModule } from 'ngx-echarts';
 import { GraficoFinalComponent } from './grafico-final/grafico-final.component';
+import { MENSAISUNIDADESComponent } from './mensaisunidades/mensaisunidades.component';
+import { TiposAlertaComponent } from './tipos-alerta/tipos-alerta.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     PrimeiroGraficoComponent,
     UltimoGraficoComponent,
-    GraficoFinalComponent
+    GraficoFinalComponent,
+    MENSAISUNIDADESComponent,
+    TiposAlertaComponent,
+    
   ],
   imports: [
     BrowserModule,

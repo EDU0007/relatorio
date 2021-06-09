@@ -220,9 +220,12 @@ export class AppComponent implements OnInit {
       if(value['alert_type']=="160"){
         bocejo++;
       }
+      console.log();
+    
+
     });
 
-    // verificacao de existencia de dados 
+   
     if (uploadArquivo>0){
       response_data.push({ data: [uploadArquivo], label: "Upload de arquivo" })
     }
