@@ -82,7 +82,7 @@ export class MapComponent implements OnInit {
     });
     // falta colocar validações- 1 validar quando tira selecao deixando vazio
     this.pontos=new_point;
-    this.center = this.pontos[0].position;
+    this.center = this.pontos[0]?.position;
     console.log(this.form.value.checkArray)
 
   }
